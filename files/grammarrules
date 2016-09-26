@@ -1,0 +1,19 @@
+statement::= statement\\(decFunction|defFunction|decVariable|defVariable\\)statement
+decFunction::= typeIdentifier identifier(void|typeIdentifier identifier,...);
+defFunction::= typeIdentifier identifier(void|typeIdentifier identifier,...){flowStatement}
+decVariable::= typeIdentifier identifier;
+defVariable::= typeIdentifier giveValStatement;
+flowStatement::=decVariable|giveValStatement|callFunction|branchStatement|repeatStatement
+branchStatement::=if(expression){flowStatement}else{flowStatement}|if(expression){flowStatement}
+repeatStatement::=while(expression){flowStatement}
+giveValStatement::= identifier=expression;
+expression::= identifier;|callFunction;|number;|identifier\\+operator;|operator\\+identifier;|identifier\\+operator\\+identifier;
+callFunction::= identifier(void|identifier,...);
+
+reservedWord::=flowDivider|typeIdentifier
+flowDivider::=if,while,{,},(,),;,,,
+
+typeIdentifier::=char,int,char*,int*,void
+identifier::= [a-zA-Z]+[a-zA-Z0-9]*
+operator::=+,-,*,/,>,<,==,<<,>>,&
+number::=[1-9]+[0-9]*
